@@ -1,0 +1,9 @@
+<!-- alert.component.html -->
+<div *ngIf="alert" class="alert" [ngClass]="{
+    'alert-success': alert.type === 'success',
+    'alert-warning': alert.type === 'warning',
+    'alert-info': alert.type === 'info',
+    'alert-danger': alert.type === 'danger'
+  }" role="alert">
+  {{ alert.message }}
+</div>

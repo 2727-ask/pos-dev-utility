@@ -1,13 +1,19 @@
-import {app, BrowserWindow, screen} from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { ipcMain } from 'electron/main';
+import * as express from 'express';
+import * as cors from 'cors';
+import * as detect from 'detect-port';
+import { Proxy } from './interfaces/proxy';
+import { Message } from './interfaces/message';
 
 let win: BrowserWindow | null = null;
 const args = process.argv.slice(1),
-  serve = args.some(val => val === '--serve');
+  serve = args.some((val) => val === '--serve');
 
 function createWindow(): BrowserWindow {
-
   const size = screen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
@@ -18,7 +24,7 @@ function createWindow(): BrowserWindow {
     height: size.height,
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve),
+      allowRunningInsecureContent: serve,
       contextIsolation: false,
     },
   });
@@ -34,7 +40,7 @@ function createWindow(): BrowserWindow {
     let pathIndex = './index.html';
 
     if (fs.existsSync(path.join(__dirname, '../dist/index.html'))) {
-       // Path when running electron in local folder
+      // Path when running electron in local folder
       pathIndex = '../dist/index.html';
     }
 
@@ -76,8 +82,68 @@ try {
       createWindow();
     }
   });
-
 } catch (e) {
   // Catch Error
   // throw e;
 }
+
+function reportmessage(isError: boolean, msg: string) {
+  return { isError: isError, msg: msg };
+}
+
+let servers: Map<number, any> = new Map();
+
+ipcMain.handle('startProxyService', async (event, query: Proxy) => {
+  let isProxyStarted = false;
+  try {
+    console.log('Starting Proxy Service');
+    const app = express();
+    app.use(cors());
+    app.use(
+      '',
+      createProxyMiddleware({
+        target: query.url,
+        changeOrigin: true,
+        onProxyRes: function (proxyRes, req, res) {
+          proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+        },
+      })
+    );
+
+    try {
+      console.log('Query Port is', query.port);
+      let port = await detect(query.port);
+      console.log('Detected port is', port);
+      if (port == query.port) {
+        console.log('PORT FOUND');
+        const server = app.listen(port);
+        servers.set(port, server);
+        return reportmessage(false, 'Proxy started sucessfully');
+      } else {
+        return reportmessage(true, 'Port not available');
+      }
+    } catch (error) {
+      console.log(error);
+      return reportmessage(true, `${error}`);
+    }
+  } catch (error) {
+    console.log('Error', error);
+    return reportmessage(true, `${error}`);
+  }
+});
+
+ipcMain.handle('stopProxyServer', async (event, query: number) => {
+  const server = servers.get(Number(query));
+  console.log("Running servers are", servers);
+  console.log("PORT is", query);
+  console.log("Attempting to stop",server);
+  if (server) {
+    server.close(() => {
+      console.log('Server has been stopped');
+      servers.delete(query);
+    });
+    return reportmessage(false, 'Proxy stopped sucessfully.');
+  }else{
+    return reportmessage(true, `Proxy server not found.`);
+  }
+});

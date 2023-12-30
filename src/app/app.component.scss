@@ -1,3 +1,9 @@
-:host {
-  
+.omnamahshivaay {
+  overflow-y: hidden !important;
+}
+
+.router-container {
+  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: 90vh; /* Set a fixed height, adjust as needed */
 }

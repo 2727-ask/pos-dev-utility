@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<div class="omnamahshivaay">
+  <app-navbar></app-navbar>
+
+  <div class="row g-0">
+    <div class="col-1">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-11">
+      <div class="container-fluid mt-2">
+        <div class="container">
+          <app-alert></app-alert>
+        </div>
+      </div>
+      <div class="router-container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

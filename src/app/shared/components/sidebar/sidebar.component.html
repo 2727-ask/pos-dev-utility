@@ -1,0 +1,46 @@
+<div class="sidebar">
+  <ul>
+    <li class="sidebar-tab" routerLinkActive="active">
+      <a
+        routerLink="/"
+        (click)="changeTab(1)"
+        [ngClass]="{ active: activeTab === 1 }"
+      >
+        <i class="bi bi-database"></i>
+        <span
+          class="icon-title"
+          [ngClass]="{ 'icon-title-active': activeTab === 1 }"
+          >Database</span
+        >
+      </a>
+    </li>
+    <li class="sidebar-tab" routerLinkActive="active">
+      <a
+        routerLink="/proxy-manager"
+        (click)="changeTab(2)"
+        [ngClass]="{ active: activeTab === 2 }"
+      >
+        <i class="bi bi-router-fill"></i>
+        <span
+          class="icon-title"
+          [ngClass]="{ 'icon-title-active': activeTab === 2 }"
+          >Proxy</span
+        >
+      </a>
+    </li>
+    <li class="sidebar-tab" routerLinkActive="active">
+      <a
+        routerLink="/settings"
+        (click)="changeTab(3)"
+        [ngClass]="{ active: activeTab === 3 }"
+      >
+        <i class="bi bi-gear-wide-connected"></i>
+        <span
+          class="icon-title"
+          [ngClass]="{ 'icon-title-active': activeTab === 3 }"
+          >Settings</span
+        >
+      </a>
+    </li>
+  </ul>
+</div>

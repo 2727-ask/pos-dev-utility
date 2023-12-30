@@ -1,0 +1,10 @@
+.icon-button {
+  color: black;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-button:hover .bi-stop-circle {
+  color: red;
+}

@@ -1,0 +1,18 @@
+<div class="card bg-dark">
+  <div class="card-header text-white">
+    <img
+      src="assets/server_started.gif"
+      style="width: 20px"
+      srcset=""
+    />&nbsp;&nbsp;&nbsp;{{proxy.name}}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Port: {{proxy.port}} | {{proxy.type}}</li>
+    <li class="list-group-item">{{proxy.schema || 'SCHEMA: NA'}}</li>
+    <li class="list-group-item">
+      <a class="icon-button" (click)="stopProxy()">
+        <i class="bi bi-stop-circle" style="font-size: 15px"></i>
+      </a>
+    </li>
+  </ul>
+</div>

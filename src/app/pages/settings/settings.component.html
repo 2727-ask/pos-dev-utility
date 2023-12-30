@@ -1,0 +1,188 @@
+<div class="container-fluid">
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-6">
+        <div class="mb-3 p-3 bg-dark text-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Saved Connections</h5>
+            <button
+              class="btn btn-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#connectionModal"
+            >
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+          <div
+            *ngFor="let connection of myConnections"
+            class="card position-relative bg-secondary text-white mt-3"
+          >
+            <div class="card-body">
+              <i class="bi bi-database" style="font-size: 20px;"></i>&nbsp;
+              <!-- Database symbol -->
+              <span>{{ connection.connectionName }}&nbsp;</span><span>&nbsp;<i class="bi bi-wifi"></i>&nbsp;{{ connection.databaseHost }}</span>:<span>{{connection.port}}</span>
+              <br />
+              <i class="bi bi-person" style="font-size: 20px;"></i>&nbsp; <span>{{ connection.username }}</span>
+            </div>
+            <div class="position-absolute top-0 end-0 mt-2 me-2">
+              <span class="dot bg-success"></span>
+              <!-- Green dot -->
+            </div>
+
+            <div class="position-absolute bottom-0 end-0 mb-2">
+              <button class="btn btn-sm btn-outline-secondary" (click)="deleteConnection(connection.id)">
+                <i class="bi bi-trash3 text-danger"></i>
+                <!-- Edit icon -->
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="myConnections.length==0">
+            <br>
+            <p>You do not have any saved connections.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="mb-3 p-3 bg-dark text-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Registered Proxies</h5>
+          </div>
+          <div
+            *ngFor="let proxy of this.registeredProxies"
+            class="card position-relative bg-secondary text-white mt-3"
+          >
+            <div class="card-body">
+              <img style="width:30px" src="/assets/computer.gif" alt="" srcset="">&nbsp;
+              <!-- Database symbol -->
+              <span>{{ proxy.name }}&nbsp;</span><span>&nbsp;&nbsp;{{ proxy.url }}</span>
+              <br />
+              <i class="bi bi-code-square" style="font-size: 20px;"></i>&nbsp; <span>{{ proxy.type }}</span> &nbsp;<i class="bi bi-person-circle"></i>&nbsp; <span>{{ proxy.schema }}</span>
+            </div>
+
+
+            <div class="position-absolute bottom-0 end-0 mb-2">
+              <button class="btn btn-sm btn-outline-secondary" (click)="deleteProxy(proxy.id)">
+                <i class="bi bi-trash3 text-danger"></i>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="registeredProxies.length==0">
+            <br>
+            <p>You do not have any saved proxies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Connections -->
+<div
+  class="modal fade"
+  id="connectionModal"
+  tabindex="-1"
+  aria-labelledby="connectionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="connectionModalLabel">New Connection</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Reactive Form -->
+        <form [formGroup]="connectionForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="connectionName" class="form-label"
+              >Connection Name<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="connectionName"
+              class="form-control"
+              formControlName="connectionName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="databaseHost" class="form-label"
+              >Database Host<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="databaseHost"
+              class="form-control"
+              formControlName="databaseHost"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="port" class="form-label"
+              >Port<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="port"
+              class="form-control"
+              formControlName="port"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="sid" class="form-label"
+              >SID<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="sid"
+              class="form-control"
+              formControlName="sid"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label"
+              >Username<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              formControlName="username"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label"
+              >Password<span class="text-danger">*</span></label
+            >
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              formControlName="password"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save Connection
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
