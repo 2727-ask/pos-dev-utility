@@ -24,18 +24,22 @@ export class KissMyAceComponent implements AfterViewInit {
 
   private _content!: string;
 
-  outputValue: string = "";
+  outputValue: string = '';
   @Input() set content(value: string) {
-    this._content = value;
-    console.log('Hi', this._content);
-    this.outputValue = "";
-    // this.codeEditor.setValue("");
-    if (this.codeEditor) {
-      for (let i = 0; i < this._content.length; i++) {
-        this.outputValue += this._content[i] + '\n';
+    console.log("Value is", value);
+    
+    if (value) {
+      this._content = value;
+      console.log('Hi', this._content);
+      this.outputValue = '';
+      // this.codeEditor.setValue("");
+      if (this.codeEditor) {
+        for (let i = 0; i < this._content.length; i++) {
+          this.outputValue += this._content[i] + '\n';
+        }
+        this.codeEditor.setValue(this.outputValue);
+        this.codeEditor.clearSelection(); // To remove the highlight from the entire content
       }
-      this.codeEditor.setValue(this.outputValue);
-      this.codeEditor.clearSelection(); // To remove the highlight from the entire content
     }
   }
 
