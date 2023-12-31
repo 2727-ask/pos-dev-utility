@@ -28,16 +28,31 @@
         >
       </a>
     </li>
+    
+    <li class="sidebar-tab" routerLinkActive="active">
+      <a
+        routerLink="/json-to-ts"
+        (click)="changeTab(4)"
+        [ngClass]="{ active: activeTab === 4 }"
+      >
+      <i class="bi bi-filetype-tsx"></i>
+        <span
+          class="icon-title"
+          [ngClass]="{ 'icon-title-active': activeTab === 4 }"
+          >JSON to TS</span
+        >
+      </a>
+    </li>
     <li class="sidebar-tab" routerLinkActive="active">
       <a
         routerLink="/settings"
-        (click)="changeTab(3)"
-        [ngClass]="{ active: activeTab === 3 }"
+        (click)="changeTab(5)"
+        [ngClass]="{ active: activeTab === 5 }"
       >
         <i class="bi bi-gear-wide-connected"></i>
         <span
           class="icon-title"
-          [ngClass]="{ 'icon-title-active': activeTab === 3 }"
+          [ngClass]="{ 'icon-title-active': activeTab === 5 }"
           >Settings</span
         >
       </a>

@@ -10,6 +10,8 @@ import { ProxyComponent } from './pages/proxy/proxy.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { CommonModule } from '@angular/common';
 import { ProxyManagerComponent } from './pages/proxy-manager/proxy-manager.component';
+import { JsonDiffCheckerComponent } from './pages/json-diff-checker/json-diff-checker.component';
+import { JsonToTsComponent } from './pages/json-to-ts/json-to-ts.component';
 
 const routes: Routes = [
 
@@ -24,6 +26,14 @@ const routes: Routes = [
   {
     path: 'proxy-manager',
     component: ProxyManagerComponent
+  },
+  {
+    path: 'json-diff-checker',
+    component: JsonDiffCheckerComponent
+  },
+  {
+    path: 'json-to-ts',
+    component: JsonToTsComponent
   },
   {
     path: 'settings',

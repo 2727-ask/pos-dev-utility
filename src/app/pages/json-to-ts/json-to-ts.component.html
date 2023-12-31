@@ -1,0 +1,69 @@
+<!-- <app-kiss-my-ace></app-kiss-my-ace> -->
+
+<div class="container-fluid">
+  <div class="container my-3">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <span class="bi bi-info-circle-fill me-2"></span>
+                <!-- Placeholder for the icon -->
+                <h5 class="card-title mb-0">JSON to TypeScript Interface</h5>
+              </div>
+              <small class="text-muted">JSON TO TS</small>
+            </div>
+            <p class="card-text">
+              This tool allows you to convert JSON to TypeScript interface
+              model.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="container h-70">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6" style="height: 80vh !important">
+              <div class="title" style="height: 10%">
+                <span>Json</span>
+              </div>
+              <app-kiss-my-ace
+                mode="ace/mode/json"
+                (contentChanged)="generateTsInterfaces($event)"
+                [customStyle]="{ height: '500px', width: '100%' }"
+              ></app-kiss-my-ace>
+            </div>
+            <div class="col-6" style="height: 80vh !important">
+              <div class="title" style="height: 10%">
+                <span>Type</span><span style="color: #05386b">Script</span>
+              </div>
+              <app-kiss-my-ace
+                mode="ace/mode/typescript"
+                [customStyle]="{ height: '500px', width: '100%' }"
+                [content]="outputAns"
+              ></app-kiss-my-ace>
+              <!-- <div id="output-editor" style="height: 90%;"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container my-2">
+    <div class="row">
+        <div class="col-6">
+            <app-kiss-my-ace></app-kiss-my-ace> 
+        </div>
+        <div class="col-6">
+            <app-kiss-my-ace></app-kiss-my-ace>
+        </div>
+    </div>
+  </div> -->
+</div>

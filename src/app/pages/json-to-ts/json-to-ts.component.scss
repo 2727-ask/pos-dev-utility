@@ -1,0 +1,15 @@
+.title span{
+    font-size: 2em;
+}
+
+.ace_scrollbar {
+    contain: strict;
+    position: absolute;
+    right: 0;
+    display: none !important;
+    z-index: 6;
+}
+
+.myeditor{
+    border: 1px solid #05386b;
+}
