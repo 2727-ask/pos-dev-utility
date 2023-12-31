@@ -179,3 +179,68 @@ Please refer to [HOW_TO file](./HOW_TO.md)
 [github-star]: https://github.com/maximegris/angular-electron/stargazers
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20angular-electron!%20https://github.com/maximegris/angular-electron%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/maximegris/angular-electron.svg?style=social
+
+
+
+{
+    "results": [
+        {
+            "columns": [
+                {
+                    "name": "USERNAME",
+                    "type": "VARCHAR2"
+                },
+                {
+                    "name": "AGENT_ID",
+                    "type": "VARCHAR2"
+                },
+                {
+                    "name": "AGENT_PROFILE_ID",
+                    "type": "VARCHAR2"
+                },
+                {
+                    "name": "DEFAULT_AGENT_PROFILE_ID",
+                    "type": "VARCHAR2"
+                }
+            ],
+            "items": [
+                {
+                    "username": "USAGENT_8900",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                },
+                {
+                    "username": "HNAGENT",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                },
+                {
+                    "username": "QQ10AGENT",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                },
+                {
+                    "username": "VIGOAGENT3",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                },
+                {
+                    "username": "RMOUSAGENT01",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                },
+                {
+                    "username": "VIGOAGENT1",
+                    "agent_id": "2100000000000600",
+                    "agent_profile_id": "8100000001284030",
+                    "default_agent_profile_id": "5100000000003513"
+                }
+            ]
+        }
+    ]
+}
