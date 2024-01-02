@@ -244,3 +244,46 @@ Please refer to [HOW_TO file](./HOW_TO.md)
         }
     ]
 }
+
+function isDMLCommand(query) {
+  // Trim leading and trailing spaces and remove all line breaks for easier regex matching
+  const cleanedQuery = query.trim().replace(/\s+/g, ' ').toLowerCase();
+
+  // Basic DML SQL commands patterns
+  const dmlPatterns = [
+    /^insert\s+into\s+/i, // Basic pattern for INSERT INTO
+    /^update\s+\S+\s+set\s+/i, // Basic pattern for UPDATE
+    /^delete\s+from\s+/i // Basic pattern for DELETE
+    // You can add more patterns if needed
+  ];
+
+  // Check if the query matches any of the DML patterns
+  return dmlPatterns.some(pattern => pattern.test(cleanedQuery));
+}
+
+// Usage
+const query = "UPDATE my_table SET column1 = 'value'";
+if (isDMLCommand(query)) {
+  throw new Error("DML commands are not allowed");
+}
+
+
+
+
+
+function addDefaultLimit(query, defaultLimit = 100) {
+  if (query.trim().toLowerCase().startsWith('select')) {
+    if (query.toLowerCase().includes('rownum')) {
+      // ROWNUM is already specified
+      return query;
+    } else {
+      // Oracle 12c or later version
+      return query.trim() + ` FETCH NEXT ${defaultLimit} ROWS ONLY`;
+    }
+  }
+  return query;
+}
+
+// Usage
+const query = "SELECT * FROM my_table";
+const limitedQuery = addDefaultLimit(query); // Adds default limit
